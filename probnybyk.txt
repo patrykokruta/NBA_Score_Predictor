@@ -3,3 +3,4 @@ zmiana
 zmiana2
 zmiana po dodaniu branch Develop
 pitok caputy
+git checkout Develop

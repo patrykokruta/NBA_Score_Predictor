@@ -1,13 +1,13 @@
 from nba_api.stats.static import teams
 from nba_api.stats.endpoints import leaguegamefinder
-import tenorflow
+
 teamA = input()
 teamB = input()
 
 nba_teams = teams.get_teams()
 #print(nba_teams)
 #Select the dictionary for the Celtics, which contains their team ID
-MteamA = [team for team in nba_teams if team['abbreviation'] == teamA][0]
+teamA = [team for team in nba_teams if team['abbreviation'] == teamA][0]
 teamA_Id = teamA['id']
 
 # Query for games where the Celtics were playing

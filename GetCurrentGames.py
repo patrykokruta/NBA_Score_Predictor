@@ -10,7 +10,10 @@ nba_teams = teams.get_teams()
 gamefinder = leaguegamefinder.LeagueGameFinder(league_id_nullable="00")
 games = gamefinder.get_data_frames()[0]
 games.head()
-Currentgames = games[games.GAME_DATE.str[:] == '2020-01-16']
+Currentgames = games[games.GAME_DATE.str[:] == '2020-02-04']
 
-a = ScoreboardV2(game_date="2019-12-3",).last_meeting.data
+#a = ScoreboardV2(game_date="2020-2-5",).last_meeting.data
+b = ScoreboardV2(game_date="2020-2-4",).last_meeting.data
 print(Currentgames)
+
+print(b)

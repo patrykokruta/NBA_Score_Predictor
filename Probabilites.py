@@ -9,6 +9,8 @@ from Sezon2TeamsCount import probability_a as pra
 from Sezon2TeamsCount import probability_ab as prab
 from nba_api.stats.library.http import NBAStatsHTTP
 from nba_api.stats.library.http import NBAStatsResponse
+import pandas as pd
+from pandas import DataFrame
 # NBAStatsHTTP.clean_contents()
 # NBAStatsResponse.get_response()
 # conditional probability
@@ -24,6 +26,11 @@ teamAA = input()
 teamBB = input()
 
 tryme = games(teamAA, teamBB)
+df = DataFrame(tryme)
+
+export = df.to_excel("output.xlsx", index = None, header=True)
+#exp=tryme.to_excel("output2.xlsx")
+print("halo")
 #pra(tryme)
 
 # prab(tryme)

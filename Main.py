@@ -4,9 +4,10 @@
 # C: team A  lost on condition that played two games in row
 # D: team A  lost on condition that
 # E: team A  lost on condition that
-from Sezon2TeamsCount import get_all_games_between_two_teams as games
-from Sezon2TeamsCount import probability_a as pra
-from Sezon2TeamsCount import probability_ab as prab
+from CountProbabilites import get_all_games_between_two_teams as games
+from CountProbabilites import probability_a
+from CountProbabilites import *
+
 from nba_api.stats.library.http import NBAStatsHTTP
 from nba_api.stats.library.http import NBAStatsResponse
 import pandas as pd
@@ -25,12 +26,15 @@ print("Pass to team names: ")
 teamAA = input()
 teamBB = input()
 
-tryme = games(teamAA, teamBB)
-df = DataFrame(tryme)
-
-export = df.to_excel("output.xlsx", index = None, header=True)
+allgames = games(teamAA, teamBB)
+a, b =probability_a(allgames)
+print(a, b)
+c, d=probability_ab(allgames, a)
+print(c, d)
+e, f = probability_ac(allgames, c)
+print(e, f)
+#SAVING DATA TO EXCEL
+#df = DataFrame(tryme)
+#export = df.to_excel("output.xlsx", index = None, header=True)
 #exp=tryme.to_excel("output2.xlsx")
-print("halo")
-#pra(tryme)
 
-# prab(tryme)

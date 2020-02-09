@@ -2,8 +2,6 @@ from nba_api.stats.static import teams
 from nba_api.stats.endpoints import leaguegamefinder
 
 
-#teamA = input()
-#teamB = input()
 
 def get_all_games_between_two_teams(teamA, teamB):
 
@@ -43,27 +41,43 @@ def get_all_games_between_two_teams(teamA, teamB):
 # print(loseCounter)
 
 def probability_a(all_games):
-        # teamA_games_WON = all_games[all_games.WL == 'W'].WL.count()
+        teamA_games_WON = all_games[all_games.WL == 'W'].WL.count()
         teamA_games_LOST = all_games[all_games.WL == 'L'].WL.count()
         # licznik = teamA_games_WON.WL.count()
-        # print(teamA_games_WON / all_games.WL.count())
-        print(teamA_games_LOST / all_games.WL.count())
-        print(all_games.WL.count())
+        teamA_games_WON_Probability = teamA_games_WON / all_games.WL.count()
+        #print(teamA_games_WON / all_games.WL.count())
+        #print(teamA_games_LOST / all_games.WL.count())
+        #print(all_games.WL.count())
+        #print(teamA_games_WON)
+        return teamA_games_WON, teamA_games_WON_Probability
 
-
-def probability_ab(all_games): # condition that team A lost to team B when lost the previous match against them
+def probability_ab(all_games,teamA_games_WON): # condition that team A lost to team B when lost the previous match against them
         print("probAB")
         #  teamA_games_lost_when_lost_pr_match = all_games[all_games.WL == 'L'].WL.count()
-        lostgames = 0
-        for n in  all_games.WL:
-            k=0
-            if all_games.iloc[k].WL == 'L' and all_games.iloc[k+1].WL == 'L':
-                lostgames = lostgames + 1
-            k = k+1
+        incr = all_games.WL.count()
+        wongames = 0
+        k = 0
+        for n in range(incr-1):
 
-        print(lostgames)
-         # print(all_games[all_games.GAME_ID == '0029201048'])
-         #print(all_games[all_games == '2539'])
-         #print(all_games.iloc[1])
-         #print(all_games.iloc[0])
-         #print(all_games.iloc[22])
+            if all_games.iloc[k].WL == 'W' and all_games.iloc[k+1].WL == 'W':
+                wongames = wongames + 1
+            k=k+1
+
+        probability_game_wontwice =  wongames/teamA_games_WON
+        return wongames, probability_game_wontwice
+
+def probability_ac(all_games, teamAwon):  # condition that team A lost to team B when lost the previous match against them
+    print("probAc")
+    #  teamA_games_lost_when_lost_pr_match = all_games[all_games.WL == 'L'].WL.count()
+    incr = all_games.WL.count()
+    lostgames = 0
+    k = 0
+    for n in range(incr - 2):
+
+        if all_games.iloc[k].WL == 'W' and all_games.iloc[k + 1].WL == 'W' and all_games.iloc[k+2].WL == "W":
+            lostgames = lostgames + 1
+        k = k + 1
+
+    prob=lostgames/teamAwon
+
+    return lostgames, prob

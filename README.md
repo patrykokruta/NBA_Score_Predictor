@@ -1,2 +1,4 @@
 # NBA_Score_Predictor
-this app
+
+Useful information
+P(A) - probability that team A wins a match

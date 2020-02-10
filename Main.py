@@ -37,10 +37,16 @@ print(e, f)
 
 wintotal, probability = probability_ad(allgamesteamA)
 wintotaltwice, probabilitytwice = probability_ae(allgamesteamA,wintotal)
+wintotalthrice, probabilitythrice = probability_af(allgamesteamA,wintotaltwice)
 print(wintotal,probability)
 print(probabilitytwice,wintotaltwice)
+print(wintotalthrice,probabilitythrice)
 
+homewins = probability_ag(allgames)
+print(homewins)
 
+overtimewins = probability_ah(allgamesteamA)
+print(overtimewins)
 #SAVING DATA TO EXCEL
 #df = DataFrame(tryme)
 #export = df.to_excel("output.xlsx", index = None, header=True)

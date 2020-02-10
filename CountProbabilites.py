@@ -28,7 +28,7 @@ def probability_a(all_games):
     return teamA_games_win, teamA_games_win_probability
 
 
-def probability_ab(all_games, games_won_once):  # condition that team A lost to team B when lost the previous match against them
+def probability_ab(all_games, games_won_once):
     game_count = all_games.WL.count()
     won_games_twice = 0
     k = 0
@@ -82,3 +82,50 @@ def probability_ae(teamA_games, games_won_total):
 
     probability_won_games_total_twice = games_won_total_twice/games_won_total
     return games_won_total_twice, probability_won_games_total_twice
+
+
+def probability_af(teamA_games, games_won_total_twice):
+    games_won_total_thrice = 0
+    k = 0
+    game_count = teamA_games.WL.count()
+    for n in range(game_count - 2):
+        if teamA_games.iloc[k].WL == 'W' and teamA_games.iloc[k+1].WL == 'W' and teamA_games.iloc[k+2].WL == 'W':
+            games_won_total_thrice = games_won_total_thrice + 1
+        k = k+1
+
+    probability_won_games_total_thrice = games_won_total_thrice/games_won_total_twice
+    return games_won_total_thrice, probability_won_games_total_thrice
+
+
+def probability_ag(all_games):
+    home_games_won = 0
+    k = 0
+    home_games = all_games[all_games.MATCHUP.str.contains('vs')]
+    game_count = home_games.WL.count()
+    for n in range(game_count):
+        if all_games.iloc[k].WL == 'W':
+            home_games_won = home_games_won + 1
+        k = k + 1
+
+    probability_home_games_won = home_games_won/game_count
+    return probability_home_games_won
+
+
+def probability_ah(teamA_games):
+    #teamA_games_won = teamA_games[teamA_games.WL.str.contains('W')]
+    after_overtime_games_won = 0
+    overtime_games = 0
+    k = 0
+    game_count =  teamA_games.WL.count()
+
+    for n in range(game_count - 1):
+        if teamA_games.iloc[k].MIN > 245:
+            overtime_games = overtime_games + 1
+        if teamA_games.iloc[k].WL == 'W' and teamA_games.iloc[k].MIN > 245:
+            after_overtime_games_won = after_overtime_games_won + 1
+        k = k + 1
+
+    probability_after_overtime_games_won = after_overtime_games_won/overtime_games
+    print(overtime_games,after_overtime_games_won)
+    return probability_after_overtime_games_won
+

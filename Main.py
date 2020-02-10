@@ -26,6 +26,7 @@ print("Pass to team names: ")
 teamAA = input()
 teamBB = input()
 
+allgamesteamA = all_games_of_one_team(teamAA)
 allgames = games(teamAA, teamBB)
 a, b =probability_a(allgames)
 print(a, b)
@@ -33,6 +34,13 @@ c, d=probability_ab(allgames, a)
 print(c, d)
 e, f = probability_ac(allgames, c)
 print(e, f)
+
+wintotal, probability = probability_ad(allgamesteamA)
+wintotaltwice, probabilitytwice = probability_ae(allgamesteamA,wintotal)
+print(wintotal,probability)
+print(probabilitytwice,wintotaltwice)
+
+
 #SAVING DATA TO EXCEL
 #df = DataFrame(tryme)
 #export = df.to_excel("output.xlsx", index = None, header=True)

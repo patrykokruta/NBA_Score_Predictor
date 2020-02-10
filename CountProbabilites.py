@@ -1,6 +1,14 @@
 from nba_api.stats.static import teams
 from nba_api.stats.endpoints import leaguegamefinder
 
+def all_games_of_one_team(teamA):
+    nba_teams = teams.get_teams()
+    teamA = [team for team in nba_teams if team['abbreviation'] == teamA][0]
+    teamA_Id = teamA['id']
+    gamefinder = leaguegamefinder.LeagueGameFinder(team_id_nullable=teamA_Id)
+    games = gamefinder.get_data_frames()[0]
+    return games
+
 
 def get_all_games_between_two_teams(teamA, teamB):
     nba_teams = teams.get_teams()
@@ -48,3 +56,29 @@ def probability_ac(all_games, games_won_twice):  # condition that team A lost to
     probability_games_won_thrice = games_won_thrice / games_won_twice
 
     return games_won_thrice, probability_games_won_thrice
+
+
+def probability_ad(teamA_games):
+    games_won_total = 0
+    k = 0
+    game_count = teamA_games.WL.count()
+    for n in range(game_count):
+        if teamA_games.iloc[k].WL == 'W':
+            games_won_total = games_won_total + 1
+        k = k+1
+
+    probability_won_games_total = games_won_total/game_count
+    return games_won_total, probability_won_games_total
+
+
+def probability_ae(teamA_games, games_won_total):
+    games_won_total_twice = 0
+    k = 0
+    game_count = teamA_games.WL.count()
+    for n in range(game_count - 1):
+        if teamA_games.iloc[k].WL == 'W' and teamA_games.iloc[k+1].WL == 'W':
+            games_won_total_twice = games_won_total_twice + 1
+        k = k+1
+
+    probability_won_games_total_twice = games_won_total_twice/games_won_total
+    return games_won_total_twice, probability_won_games_total_twice

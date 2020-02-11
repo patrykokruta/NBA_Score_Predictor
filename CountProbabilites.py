@@ -126,6 +126,6 @@ def probability_ah(teamA_games):
         k = k + 1
 
     probability_after_overtime_games_won = after_overtime_games_won/overtime_games
-    print(overtime_games,after_overtime_games_won)
+
     return probability_after_overtime_games_won
 

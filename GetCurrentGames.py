@@ -12,28 +12,24 @@ from pandas import DataFrame
 
 today = date.today()
 print(today)
-nba_teams = teams.get_teams()
 
-#print("Chose date")
-#datka = input()
+def get_current_games():
 
-jutro = "2020-02-12"
-d = {'teamA' : [], 'teamB' :[]}
-#ff = DataFrame(columns=['teamA', 'teamB'])
-b = ScoreboardV2(game_date=jutro,).last_meeting.data
-ran=b['data'].__len__()
-dff = DataFrame(index=np.arange(0,ran),columns=['teamA', 'teamB'])
+    print("Chose date")
+    datka = input()
 
-for n in range(ran):
-    x = b['data'][n][6]
-    y = b['data'][n][11]
-    dff.iloc[n].teamA = y
-    dff.iloc[n].teamB = x
+    jutro = "2020-02-12"
+    d = {'teamA' : [], 'teamB' :[]}
+    #ff = DataFrame(columns=['teamA', 'teamB'])
+    b = ScoreboardV2(game_date=datka,).last_meeting.data
+    ran=b['data'].__len__()
+    dff = DataFrame(index=np.arange(0,ran),columns=['teamA', 'teamB'])
+
+    for n in range(ran):
+        x = b['data'][n][6]
+        y = b['data'][n][11]
+        dff.iloc[n].teamA = y
+        dff.iloc[n].teamB = x
 
 
-#print(d)
-#print(a)
-#print(b)
-print(dff)
-#print(Currentgames)
-print("jej")
+    return dff

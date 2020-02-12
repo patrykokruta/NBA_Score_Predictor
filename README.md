@@ -1,9 +1,9 @@
 # NBA_Score_Predictor
 
 ## Configuration
-In order to use this project it is necessary to have the following libraries:
-pandas
-numpy
+In order to use this project it is necessary to have the following libraries:\
+pandas\
+numpy\
 nba-api https://pypi.org/project/nba-api/ (newest version)
 
 ## About project

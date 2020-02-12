@@ -1,5 +1,8 @@
+# This script has functions for counting conditional probabilities
+
 from nba_api.stats.static import teams
 from nba_api.stats.endpoints import leaguegamefinder
+
 
 def all_games_of_one_team(teamA):
     nba_teams = teams.get_teams()
@@ -42,7 +45,7 @@ def probability_ab(all_games, games_won_once):
     return won_games_twice, probability_game_won_twice
 
 
-def probability_ac(all_games, games_won_twice):  # condition that team A lost to team B when lost the previous match against them
+def probability_ac(all_games, games_won_twice):
 
     game_count = all_games.WL.count()
     games_won_thrice = 0
@@ -129,3 +132,17 @@ def probability_ah(teamA_games):
 
     return probability_after_overtime_games_won
 
+
+def count_win_probability(p_a,p_ab,p_ac,p_ad,p_ae,p_af,p_ag,p_ah):
+    Pwin = p_a * p_ab * p_ac * p_ad * p_ae * p_af * p_ag * p_ah
+    return Pwin
+
+def count_lose_probability(p_a, p_ab, p_ac, p_ad, p_ae, p_af, p_ag, p_ah):
+    Plose = (1 - p_a) * (1 - p_ab) * (1 - p_ac) * (1 - p_ad) * (1 - p_ae) * (1 - p_af) * (1 - p_ag) * (1 - p_ah)
+    return Plose
+
+def compare_probabilities(Pwin,Plose):
+    if Pwin > Plose:
+        return 1
+    else:
+        return 0

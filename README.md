@@ -8,7 +8,7 @@ nba-api https://pypi.org/project/nba-api/ (newest version)
 
 ## About project
 This program uses nba-api to get historical data about NBA games from website https://www.nba.com/scores#/.
-In order to predict the probability of one team winning with the other you have to run Main script insert the date of the  match and choose the teams. The output is which team is more likely to win. It is based on Naive-Bayes algorithm. 
+In order to predict the probability of one team winning with the other you have to run Main script insert the date of the  match and choose the teams. The output is which team is more likely to win. It is based on Naive-Bayes algorithm and counting different conditional probabilities. 
 
 ## Useful information  
 P(A) - probability that team A wins a match with team B  
